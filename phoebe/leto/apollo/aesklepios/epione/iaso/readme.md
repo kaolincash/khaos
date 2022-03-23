@@ -77,8 +77,8 @@ It's actually "her".
 **iii. Usage Instructions** (Part 2: So... What Am I Even Using, Then?)
 The broad strokes of how the backup process works are as follows:
 1) iaso creates two backups.
-        1a) The first backup is your quicksave slot, and is called "EldenRingQuicksave"
-        1b) The second backup is an archive that stores every backup made with iaso unless you personally remove them
+1a) The first backup is your quicksave slot, and is called "EldenRingQuicksave"
+1b) The second backup is an archive that stores every backup made with iaso unless you personally remove them
 2) There is no number 2)
 
 > **Ok so how is that dangerous?**
