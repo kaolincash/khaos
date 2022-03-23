@@ -13,8 +13,11 @@ iaso (named for the ancient Greek goddess of restoration, and all lowercase) is 
 **v. How To Customise**
 
 **i. A Personal Note** (A.K.A. Don't be a cheater, cheater.)
+
 Using iaso on your main save to restore lost runes and items is, in my opinion, contrary to the spirit of the game and constitutes cheating.
+
 While I understand iaso can and probably will be used to make cheating more convenient, I feel the benefits outweigh the potential harm, given the undeniably shaky (see: understatement) PC release of Elden Ring.
+
 I don't want my 300+ hours going down the drain due to the bugs that remain in the (otherwise reasonably playable, at this point) game, and I know you don't either.
 
 p.s. you cannot restore saves to a new steam user id and the scope of the iaso project will never extend to that; she's purely a backup tool for a specified directory, geared toward adding a rudimentary quicksave feature to games where save files are particularly precious. I recommend also utilising this for other FromSoftware games by customising it as described below.
@@ -22,7 +25,9 @@ p.s. you cannot restore saves to a new steam user id and the scope of the iaso p
 ====================================================
 
 **ii. Tested Scenarios** (like a few times to prove they worked, YMMV.)
+
 Note: Fully Offline is the only intended usage of iaso. Does this break TOS? Probably. Do you care? Probably not.
+
 I cannot account for all of FromSoftware's current or future shenanigan-detection tools, use at your own risk, don't call me if Miyazaki-san burns your house down with Flame of the Redmanes, you know the drill.
 - Fully Offline: Works as intended.
 - Logged into FromSoftware servers: Seems to work as expected. Cannot account for bans from prolonged use, idk, ymmv, etc.
@@ -31,11 +36,13 @@ I cannot account for all of FromSoftware's current or future shenanigan-detectio
 ====================================================
 
 **iii. Usage Instructions** (Part 1: What do I do with these files?)
+
 FIRST OF ALL: DISABLE STEAM CLOUD OR THIS WILL NOT WORK
 
 > **So how do I use this?**
 
 You download the batch files provided and run them as necessary.
+
 You may need to fiddle with permissions/run as administrator, depending on your setup, but theoretically you can copy and paste the code into notepad, save it as "backup.bat" and so the same for "restore.bat" if you really wanted to.
 
 > **Wait, I have to run these manually, every time?**
@@ -45,9 +52,13 @@ Not necessarily! In my case, I'm using Corsair iCUE to map F5 and F6 to backup a
 > **So I can just map the .bat files to F5 and F6 and save/restore my state every time I lose my runes?**
 
 NO! DO NOT USE IASO FOR THAT PURPOSE, SUCH AN ACTION COULD PERMANENTLY RUIN YOUR SAVE FILE.
+
 This is not an undo-redo key that will teleport your character back in time. 
+
 If the restore tool is used while the game is running it could easily damage your save because I can't account for how eldenring.exe uses those files while they're loaded.
+
 Restoring with iaso while in the Main Menu _should_ be fine, as the save files are not loaded, but I cannot account for what eldenring.exe might be doing behind the scenes. 
+
 I haven't tested it extensively so, please let me know of any cases of this happening should you deign to risk it.
 
 Remember: iaso is a tool for backing up and restoring save files THAT ARE NOT IN USE for the EXPLICIT PURPOSE of PREVENTING loss of your entire save by the game crashing and rendering your only copy of the game's save file unusable. Do, however, keep in mind that it is ONLY the restore function that has any potential downside. Spam F5 to your heart's content.
@@ -57,6 +68,7 @@ Seriously, though, don't abuse the restore function.
 > **Wait- what? Isn't it extremely risky to restore the save files at all, then?**
 
 Yes. Of course it is. IF and ONLY if the game is running and the files are in use. Similar to when the game generates stormy weather and crashes and threatens you for not closing it properly is a risk to the integrity of your save data, so, too, is overwriting live save files in a running game. 
+
 I also recognise that FromSoftware have, themselves, claimed that this specific issue has been addressed (regarding the save file corruptions, not the crashes..). 
 Just be patient whenever you want to restore a backup and close the game first.
 
@@ -76,23 +88,32 @@ It's actually "her".
 
 **iii. Usage Instructions** (Part 2: So... What Am I Even Using, Then?)
 The broad strokes of how the backup process works are as follows:
+
 1) iaso creates two backups.
+
 1a) The first backup is your quicksave slot, and is called "EldenRingQuicksave"
+
 1b) The second backup is an archive that stores every backup made with iaso unless you personally remove them
+
 2) There is no number 2)
 
 > **Ok so how is that dangerous?**
 
 It's not, when you're restoring the files manually.
+
 The danger arises when you restore the files, which is what happens next.
 
 > **There _is_ a number 2)!**
 
 There is a _number 2)_ in that there is a second file to worry about, yes.
+
 The second program, restore.bat, indiscriminately overwrites everything within "EldenRing" (your actual real live save folder with every single save slot you have  inside it) with the contents of "EldenRingQuicksave" with no confirmation prompt for accidental executions. This is for the benefit of those, myself included, mapping this to a key like F6. 
+
 You see, I play with an Xbox controller, and my keyboard is physically disabled with a custom profile that makes all but the "switch profile" and "printscreen" keys functionless, to prevent accidental interactions. I even spliced a push button into my mouse's cable so that I can toggle it on the fly without unplugging it.
 I won't be pressing this thing by accident. 
+
 You, however, might. 
+
 Don't.
 
 > **That's supposed to convince me?**
@@ -106,14 +127,19 @@ Exactly! I'm glad you agree that I am an idiot.
 > **Anything else?**
 
 Read on if you want to learn in detail how this works, otherwise just use the files as directed above.
+
 While the game isn't running.
+
 Please.
 
 ====================================================
 
 **iv. How It Works** (A.K.A. The Viewer Retention Drop-Off Point)
+
 A very simple explanation of how it works, for the layperson who wants to customise this easily, here's the excerpt that does the backup itself:
+
 Here we establish what the variable "slot" is, which we later append to the path we're interested in as its unique name.
+
 A sensible way to generate a consistently unique name for each slot is to take the current time, which will never be the same twice.
 
 `set slot="%year%-%month%-%day%@%hour%%minute%Hrs%second%s - TO MANUALLY RESTORE simply rename me 'EldenRing' and overwrite the current 'AppData-Roaming-EldenRing' folder."`
@@ -141,22 +167,24 @@ All of these are stored within `C:\Users\[Your Username]\AppData\Roaming`.
 Using the %APPDATA% shorthand (which, incidentally, also works in the Windows Explorer address bar, to get you there quicker if you want to go digging) we can avoid having to alter this for every single user as the [Your Username] is, of course, variable. Overall, this makes the path easier to type for me if I need to use it again, and easier to read, understand, and edit for the end user (that's you!) <3
 
 Finally, we run the logic of the program!
+
 All this does is copy the source directory we defined earlier into two places, in two slightly different ways:
 Remember in the previous step, we defined the "archive" variable to have an appendix? This is where our "slot" variable from earlier comes back into play.
 
 First, we `robocopy` from `source` to `quicksave`, which makes a copy of the "EldenRing" folder, which is of course in the ideal state already, and makes a 1:1 copy of it right next to it, named "EldenRingQuicksave". This cloned directory will be at C:\Users\[VARIABLE STRING]\AppData\Roaming, right alongside the original EldenRing directory.
+
 Note: the /E option tells robocopy we want *everything* inside the source folder. This means we want its subdirectories, and not just the files inside the folder you asked for, as robocopy by default will only copy files and not directories.
 
-`robocopy %source% %quicksave% /E`
+`robocopy %source% %quicksave% /E /is /it`
 
 The next line is similar, but it uses `robocopy` from the `source` folder to the `archive`, which means it copies "EldenRing" to a second sister directory named "EldenRingArchive", but because we added the `"\%slot%"` appendix, the `\` tells robocopy to make a new directory inside EldenRingArchive named "%slot%", which uses the variable from our very first step that we've already defined as the current time.
 
 So, that next line:
 
-`robocopy %source% %archive%`
+`robocopy %source% %archive% /E /is /it`
 
 Let's break that down a bit into exactly what we're saying to the computer here. What we're doing here is trying to give instructions the computer can understand, one at a time, in as efficient a way as possible (it's simply faster if there's less data to parse). Here we have a total of 5 major things occurring that we've asked the computer to do:
-1) Do the thing. Here, the thing we want it to do is to copy, so we use the tool "robocopy" (there are other choices, I like robocopy) that performs this task because it was built in much the same way as I'm building this to perform this specific function.
+1) Do the thing. Here, the thing we want it to do is to copy, so we use the tool "robocopy" (there are other choices, I like robocopy) that performs this task because it was built to perform this task.
 2) Tell robocopy what to copy
 3) Tell robocopy where to copy it & what to name it
 4) Which in our case is made up of two parts; the root path, and also the %slot%, bundled together as the %archive% variable
@@ -189,7 +217,9 @@ from earlier. But in reverse. Simple.
 ====================================================
 
 **v. How to Customise** (or How I Learned To Stop Worrying And Modify The Code)
+
 Hopefully, you read how it all works above, so I shouldn't actually need to explain this if you've been able to infer it already.
+
 Of course, I would personally have skipped to this section first upon seeing the customisation section in the contents and thinking "ooh!" because I'm a terrible groblin, and in case that's exactly what you've just done too (hi, I see you), then here's explicit instructions:
 
 There are three variables you need to be concerned with:
