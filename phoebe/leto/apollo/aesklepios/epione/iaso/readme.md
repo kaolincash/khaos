@@ -142,7 +142,7 @@ Here we establish what the variable "slot" is, which we later append to the path
 
 A sensible way to generate a consistently unique name for each slot is to take the current time, which will never be the same twice.
 
-`set slot="%year%-%month%-%day%@%hour%%minute%Hrs%second%s - TO MANUALLY RESTORE simply rename me 'EldenRing' and overwrite the current 'AppData-Roaming-EldenRing' folder."`
+`set slot="%year%-%month%-%day%@%hour%%minute%Hrs%second%s`
 
 This has the added benefit of allowing us to find the most recent save, or to restore to an older backup from a time we know was good!
 
@@ -152,7 +152,7 @@ Next, we establish our paths. In this case, it's Elden Ring, which doesn't have 
 
 `set backup=%APPDATA%\EldenRingQuicksave`
 
-`set archive="%APPDATA%\EldenRingArchive\%slot%"`
+`set archive="%APPDATA%\EldenRingArchive\%slot%%guide%"`
 
 We have three folders here:
 
@@ -177,7 +177,7 @@ Note: the /E option tells robocopy we want *everything* inside the source folder
 
 `robocopy %source% %quicksave% /E /is /it`
 
-The next line is similar, but it uses `robocopy` from the `source` folder to the `archive`, which means it copies "EldenRing" to a second sister directory named "EldenRingArchive", but because we added the `"\%slot%"` appendix, the `\` tells robocopy to make a new directory inside EldenRingArchive named "%slot%", which uses the variable from our very first step that we've already defined as the current time.
+The next line is similar, but it uses `robocopy` from the `source` folder to the `archive`, which means it copies "EldenRing" to a second sister directory named "EldenRingArchive", but because we added the `"\%slot%%guide%"` appendix, the `\` tells robocopy to make a new directory inside EldenRingArchive named "%slot%", which uses the variable from our very first step that we've already defined as the current time and also appends the description of how to restore the folders into the name of each directory, for the sake of clarity.
 
 So, that next line:
 
