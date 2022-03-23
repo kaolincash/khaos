@@ -175,13 +175,13 @@ First, we `robocopy` from `source` to `quicksave`, which makes a copy of the "El
 
 Note: the /E option tells robocopy we want *everything* inside the source folder. This means we want its subdirectories, and not just the files inside the folder you asked for, as robocopy by default will only copy files and not directories.
 
-`robocopy %source% %quicksave% /E /is /it`
+`robocopy %source% %quicksave% /E /IS /IT`
 
 The next line is similar, but it uses `robocopy` from the `source` folder to the `archive`, which means it copies "EldenRing" to a second sister directory named "EldenRingArchive", but because we added the `"\%slot%%guide%"` appendix, the `\` tells robocopy to make a new directory inside EldenRingArchive named "%slot%", which uses the variable from our very first step that we've already defined as the current time and also appends the description of how to restore the folders into the name of each directory, for the sake of clarity.
 
 So, that next line:
 
-`robocopy %source% %archive% /E /is /it`
+`robocopy %source% %archive% /E /IS /IT`
 
 Let's break that down a bit into exactly what we're saying to the computer here. What we're doing here is trying to give instructions the computer can understand, one at a time, in as efficient a way as possible (it's simply faster if there's less data to parse). Here we have a total of 5 major things occurring that we've asked the computer to do:
 1) Do the thing. Here, the thing we want it to do is to copy, so we use the tool "robocopy" (there are other choices, I like robocopy) that performs this task because it was built to perform this task.
@@ -190,11 +190,11 @@ Let's break that down a bit into exactly what we're saying to the computer here.
 4) Which in our case is made up of two parts; the root path, and also the %slot%, bundled together as the %archive% variable
 5) How robocopy should handle contingencies such as already existing files
 
-<sup>[1]</sup>`robocopy` <sup>[2]</sup>`%source%` <sup>[3][4]</sup>`%archive%` <sup>[5]</sup>`/E /is /it`
+<sup>[1]</sup>`robocopy` <sup>[2]</sup>`%source%` <sup>[3][4]</sup>`%archive%` <sup>[5]</sup>`/E /IS /IT`
 
 Which is the same as saying: 
 
-<sup>[1]</sup>`robocopy`   +   <sup>[2]</sup>`%APPDATA%\EldenRing`   +   <sup>[3]</sup>`"%APPDATA%\EldenRingArchive\EldenRing -`   +   <sup>[4]</sup>`%slot%`   +   <sup>[5]</sup>`/E /is /it `
+<sup>[1]</sup>`robocopy`   +   <sup>[2]</sup>`%APPDATA%\EldenRing`   +   <sup>[3]</sup>`"%APPDATA%\EldenRingArchive\EldenRing -`   +   <sup>[4]</sup>`%slot%`   +   <sup>[5]</sup>`/E /IS /IT `
 
 Which, itself, is the same as telling your computer to
 
@@ -252,21 +252,22 @@ set hour=%time:~0,2%
 if %hour% lss 10 (set hour=0%time:~1,1%)
 set minute=%time:~3,2%
 set second=%time:~6,5%
-set slot="%year%-%month%-%day%@%hour%%minute%Hrs%second%s - TO MANUALLY RESTORE simply rename me and overwrite the existing save folder."
+set slot=%year%-%month%-%day%@%hour%%minute%Hrs%second%s
+set guide="TO MANUALLY RESTORE simply rename me and overwrite the existing save folder."
 
 set source="%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED"
 set quicksave="%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED QUICKSAVE"
-set archive="%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED ARCHIVE\%slot%"
+set archive="%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED ARCHIVE\%slot%%guide%"
 
-robocopy %source% %quicksave% /E /is /it
-robocopy %source% %archive% /E /is /it
+robocopy %source% %quicksave% /E /IS /IT
+robocopy %source% %archive% /E /IS /IT
 ```
 
 and the restore.bat, which you should save as a separate file:
 
 ```
 echo off
-robocopy "%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED QUICKSAVE" "%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED" /E /is /it
+robocopy "%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED QUICKSAVE" "%USERPROFILE%\Documents\FromSoftware\DARK SOULS REMASTERED" /E /IS /IT
 ```
 
 Now don't say I never did anything for you, kid.
