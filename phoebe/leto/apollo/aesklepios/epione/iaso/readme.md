@@ -47,7 +47,7 @@ You may need to fiddle with permissions/run as administrator, depending on your 
 
 > **Wait, I have to run these manually, every time?**
 
-Not necessarily! In my case, I'm using Corsair iCUE to map F5 and F6 to backup and restore within the eldenring.exe program when it runs.
+Not necessarily! In my case, I'm using a tool to map F5 and F6 to backup and restore within the eldenring.exe program when it runs.
 
 > **So I can just map the .bat files to F5 and F6 and save/restore my state every time I lose my runes?**
 
