@@ -13,5 +13,5 @@ set source=%APPDATA%\EldenRing
 set quicksave=%APPDATA%\EldenRingQuicksave
 set archive=%APPDATA%\EldenRingArchive\%slot%%guide%
 
-robocopy %source% %quicksave% /E /IS /IT
-robocopy %source% %archive% /E /IS /IT
+robocopy %source% %quicksave% /E /IS /IT /IM
+robocopy %source% %archive% /E /IS /IT /IM
